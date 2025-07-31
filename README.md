@@ -1,6 +1,6 @@
 # Uniprot Gene Namer
 
-Uniprot Gene Namer is a Python application that automates the process of converting UniProt accession numbers to gene symbols for both human and mouse proteins. It now provides both a command-line interface (CLI) and a user-friendly graphical interface (GUI) for easy interaction.
+Uniprot Gene Namer is a comprehensive Python application suite that automates the process of converting UniProt accession numbers to gene symbols for both human and mouse proteins. It now provides both a command-line interface (CLI) and a user-friendly graphical interface (GUI) for easy interaction, plus a new FASTA parser to create custom databases.
 
 ## Features
 
@@ -8,8 +8,10 @@ Uniprot Gene Namer is a Python application that automates the process of convert
 - Support for both human and mouse proteins
 - **Command-line interface (CLI) for scripting and automation**
 - User-friendly GUI built with tkinter (see original `main.py` for GUI version)
-- Reads and writes Excel files
+- **NEW: FASTA parser to create custom databases from UniProt FASTA files**
+- Reads and writes Excel files and CSV files
 - Utilizes local databases and the UniProt API for gene symbol lookups
+- Generate up-to-date protein databases from FASTA downloads
 
 ## Requirements
 
@@ -42,6 +44,33 @@ pip install -r requirements.txt
 - `Mus musculus Gene Symbol Database Uniprot Verified.xlsx`
 
 ## Usage
+
+### FASTA Parser (`fasta_parser.py`) - NEW!
+
+Create custom databases from UniProt FASTA files:
+
+```bash
+python fasta_parser.py --input <fasta_file> [--organism human|mouse] [--output-dir ./files]
+```
+
+**Arguments:**
+- `--input`: (Required) Path to the UniProt FASTA file
+- `--organism`: (Optional) Organism type (human or mouse). Defaults to human
+- `--output-dir`: (Optional) Directory to save database files. Defaults to ./files
+
+**Examples:**
+```bash
+# Create human protein database from FASTA
+python fasta_parser.py --input UP000005640_9606.fasta --organism human
+
+# Create mouse protein database
+python fasta_parser.py --input mouse_proteome.fasta --organism mouse
+
+# Save to custom directory
+python fasta_parser.py --input proteome.fasta --output-dir ./custom_databases
+```
+
+This will create both CSV and Excel database files that can be used with the CLI and GUI versions.
 
 ### CLI Version (`CLI_app.py`)
 
@@ -94,10 +123,23 @@ Save the output with added gene symbols with same name of your excel file
 
 ### How it works
 
-The application reads the input Excel file containing UniProt accession numbers.
-It first attempts to match the accession numbers with a local database.
-If a match is not found locally, it queries the UniProt API to fetch the gene symbol.
-The results are compiled and saved to a new Excel file, preserving the original data and adding a new column for gene symbols.
+#### Gene Symbol Conversion (CLI_app.py & main.py):
+1. The application reads the input Excel file containing UniProt accession numbers.
+2. It first attempts to match the accession numbers with a local database.
+3. If a match is not found locally, it queries the UniProt API to fetch the gene symbol.
+4. The results are compiled and saved to a new Excel file, preserving the original data and adding a new column for gene symbols.
+
+#### FASTA Database Creation (fasta_parser.py):
+1. Reads UniProt FASTA format files downloaded from UniProt
+2. Extracts accession numbers from the header lines (>sp|ACCESSION|...)
+3. Extracts gene symbols from the GN= fields in the headers
+4. Creates both CSV and Excel database files that can be used by the main application
+5. Provides statistics on the number of entries with and without gene symbols
+
+#### Database File Workflow:
+```
+FASTA File → fasta_parser.py → Database Files → CLI_app.py/main.py → Results
+```
 
 ## Contributing
 
@@ -115,7 +157,8 @@ Süleyman Bozkurt
 
 ## Version History
 
-v3.1 (Last updated: 09.10.2024) - Added CLI functionality (19.12.2024)
+v4.0 (31.07.2025) - Added FASTA parser functionality for creating custom databases
+v3.1 (09.10.2024) - Added CLI functionality (19.12.2024)
 
 ## Acknowledgments
 
