@@ -40,8 +40,10 @@ pip install -r requirements.txt
 
 3. Ensure you have the necessary database files in the `files` folder:
 
-- `Uniprot_database_2021.xlsx`
-- `Mus musculus Gene Symbol Database Uniprot Verified.xlsx`
+- `Uniprot_database_human_2025.xlsx` (for human proteins - 20,663 entries)
+- `Uniprot_database_mouse_2025.xlsx` (for mouse proteins - 21,803 entries)
+
+**Note:** These 2025 databases are generated using the FASTA parser and provide the most up-to-date protein information with comprehensive coverage of both SwissProt and TrEMBL entries.
 
 ## Usage
 
@@ -157,6 +159,7 @@ Süleyman Bozkurt
 
 ## Version History
 
+v4.1 (31.07.2025) - Added complete mouse support, enhanced FASTA parser, removed old .exe
 v4.0 (31.07.2025) - Added FASTA parser functionality for creating custom databases
 v3.1 (09.10.2024) - Added CLI functionality (19.12.2024)
 

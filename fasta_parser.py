@@ -38,8 +38,8 @@ def parse_fasta_file(fasta_file_path, output_csv_path, output_excel_path=None):
             for line in file:
                 # Process only header lines (starting with >)
                 if line.startswith('>'):
-                    # Extract accession number (between first | and second |)
-                    accession_match = re.search(r'>sp\|([^|]+)\|', line)
+                    # Extract accession number (between first | and second |) for both sp| and tr| entries
+                    accession_match = re.search(r'>(?:sp|tr)\|([^|]+)\|', line)
                     
                     # Extract gene symbol (after GN=)
                     gene_symbol_match = re.search(r'GN=([^\s]+)', line)

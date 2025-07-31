@@ -58,8 +58,10 @@ def main():
 
         **Database Files:**
         This script requires database files to function correctly. Please make sure you have the following files in the 'files' folder:
-            - `Uniprot_database_2021.xlsx` (for human proteins)
-            - `Mus musculus Gene Symbol Database Uniprot Verified.xlsx` (for mouse proteins)
+            - `Uniprot_database_human_2025.xlsx` (for human proteins)
+            - `Uniprot_database_mouse_2025.xlsx` (for mouse proteins)
+        
+        You can generate these databases using the fasta_parser.py script from UniProt FASTA files.
 
         **Example Usage:**
             - To process an Excel file named 'data.xlsx' for human proteins:
@@ -93,9 +95,9 @@ def main():
     # Load the appropriate database based on the selected organism
     try:
         if organism == 'human':
-            database = pd.read_excel('./files/Uniprot_database_2021.xlsx')
+            database = pd.read_excel('./files/Uniprot_database_human_2025.xlsx')
         else:  # organism == 'mouse'
-            database = pd.read_excel('./files/Mus musculus Gene Symbol Database Uniprot Verified.xlsx')
+            database = pd.read_excel('./files/Uniprot_database_mouse_2025.xlsx')
     except Exception as e:
         print(f"Error loading database: {e}")
         print(f"Please ensure that the database file is present in the 'files' folder and that you have selected the correct organism.")

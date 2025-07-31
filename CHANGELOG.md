@@ -1,5 +1,31 @@
 # Changelog
 
+## [4.1.0] - 2025-07-31
+
+### Added
+- **Mouse proteome support** - Added complete mouse database generation from UP000000589_10090.fasta
+- Enhanced FASTA parser to handle both SwissProt (`sp|`) and TrEMBL (`tr|`) entries
+- Automatic database fallback logic in CLI_app.py (prefers 2025 databases, falls back to older versions)
+- Comprehensive testing for both human and mouse databases
+
+### Enhanced
+- **Improved FASTA parsing** - Now captures both SwissProt and TrEMBL entries for complete coverage
+- **Mouse database statistics**: 21,803 entries with 98.6% gene symbol coverage
+- **Human database statistics**: 20,663 entries with 98.9% gene symbol coverage  
+- Updated CLI_app.py documentation to reflect new database options
+
+### Removed
+- **Removed outdated executable** - Deleted "GeneNamer GUI v3.0.exe" (no longer maintained)
+- **Removed old database files** - Cleaned up outdated database files:
+  - `Uniprot_database_2021.xlsx` (replaced by `Uniprot_database_human_2025.xlsx`)
+  - `Mus musculus Gene Symbol Database Uniprot Verified.xlsx` (replaced by `Uniprot_database_mouse_2025.xlsx`)
+- **Simplified CLI logic** - Removed fallback database logic since only current databases are maintained
+
+### Database Updates
+- Generated fresh mouse proteome database from UniProt (21,803 entries)
+- Regenerated human proteome database with improved parser (20,663 entries)
+- Both databases now include TrEMBL entries for comprehensive coverage
+
 ## [4.0.0] - 2025-07-31
 
 ### Added
